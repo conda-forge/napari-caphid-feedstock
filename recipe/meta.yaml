@@ -6,18 +6,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-caphid-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-caphid-{{ version }}.tar.gz
   sha256: fd78f3d19ee48bea91713a8c95c9953b1290159a28df99168e58a923e7f54f18
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8,<3.11
+    - python {{ python_min }}
   run:    
     - magicgui
     - matplotlib-base
@@ -26,7 +26,7 @@ requirements:
     - opencv
     - pandas
     - pillow
-    - python >=3.8,<3.11
+    - python >={{ python_min }},<3.11
     - qtpy
     - scikit-image
     - tqdm
@@ -40,6 +40,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/napari-caphid
